@@ -63,6 +63,7 @@ const listTodoByuuid = async (req, res) => {
 const listTodoByuname = async (req, res) => {
   try {
     const Items = await TodoModel.find({ uname: req.params.uname })
+    console.log(Items)
     res.json(Items)
   } catch (error) {
     console.error(error)
