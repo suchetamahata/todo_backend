@@ -6,7 +6,7 @@ export const authMiddleware = (req: Request| any, res: Response, next: NextFunct
     console.log(req.headers)
     try {
         if (req.headers.authorization === undefined) {
-            res.status(400).send('authorization token not provided')
+            res.status(403).send('authorization token not provided')
             return
         }
         const token = (req.headers.authorization).split(' ')[1]
@@ -15,7 +15,7 @@ export const authMiddleware = (req: Request| any, res: Response, next: NextFunct
         next()
     } catch (error) {
         if (error instanceof jwt.JsonWebTokenError) {
-            res.status(403).send(error.message)
+            res.status(500).send(error.message)
             console.log(error.name, error.message)
         }
     }
