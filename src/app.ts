@@ -11,16 +11,16 @@ import {authMiddleware} from './utils/auth'
 import morgan from 'morgan'
 
 const app = express()
-const port = 8000
+const port = 10000
 
 app.use(express.json())
 app.use(morgan('dev'))
 app.use(cors())
-app.use(express.static(path.join(__dirname, '../build')))
 app.use('/todos', todoApis)
 app.use('/user', userApis)
 app.use('/protected', authMiddleware, protectedApi)
 morgan('tiny')
+app.use(express.static(path.join(__dirname, './build')))
 
 
 app.listen(process.env.PORT || port, () => {
